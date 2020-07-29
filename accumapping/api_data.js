@@ -1,0 +1,430 @@
+define({ "api": [
+  {
+    "type": "post",
+    "url": "/addUserTag/",
+    "title": "新增User Tag",
+    "name": "AddUserTag",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "-",
+            "description": "<p>List of users</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "-.userId",
+            "description": "<p>User Accupass Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "-.source",
+            "description": "<p>User Source</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "-.tags",
+            "description": "<p>Tags.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request Body",
+          "content": "[\n    {\n        \"userId\":\"1408251006561392274495\",\n        \"source\":\"accupass\"\n        \"tags\":[\n            {\n                \"type\":901,\n                \"value\":\"2006190358038403240380\"\n            }\n        ]\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "code",
+            "description": "<p>狀態</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>狀態訊息</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>空物件</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"code\": 200,\n  \"msg\": \"ok\",\n  \"data\":{}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/routers/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/info/:id",
+    "title": "取得User基本資料",
+    "name": "GetUser",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Request": [
+          {
+            "group": "Request",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>UserId</p>"
+          }
+        ],
+        "Response": [
+          {
+            "group": "Response",
+            "type": "UserInfo",
+            "optional": false,
+            "field": "data",
+            "description": ""
+          }
+        ],
+        "UserInfo": [
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "level",
+            "description": "<p>User指標等級</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Number",
+            "optional": false,
+            "field": "level.Score",
+            "description": "<p>總分</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Attractiveness",
+            "description": "<p>吸引力</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Activeness",
+            "description": "<p>活躍度</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Pickiness",
+            "description": "<p>挑剔度</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "profile",
+            "description": "<p>個人檔案</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.photoUrl",
+            "description": "<p>大頭貼</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.email",
+            "description": "<p>Email</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.nickname",
+            "description": "<p>暱稱</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.birthday",
+            "description": "<p>生日</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>個人標籤</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "tags.type",
+            "description": "<p>標籤類別</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "tags.value",
+            "description": "<p>標籤名稱</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "todayMappingCount",
+            "description": "<p>今天已有多少配對</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "UserInfo-Example:",
+          "content": "{\n        \"level\": {\n            \"Score\": 102,\n            \"Attractiveness\": 70,\n            \"Activeness\": 90,\n            \"Pickiness\": 30\n        },\n        \"todayMappingCount\": 0,\n        \"_id\": \"johnsie\",\n        \"profile\": {\n            \"photoUrl\": \"https://static.accupass.com/userupload/2006240432301254123693.jpg\", //照片\n            \"email\": \"johnsie@accuvally.com\",\n            \"name\": \"謝耀輝\",\n            \"nickname\": \"John Sie\",\n            \"gender\": \"1\",\n            \"phoneCountryCode\": \"886\",\n            \"phone\": \"910944755\",\n            \"relationshipStatus\": \"0\",\n            \"birthday\": \"1981/10/15\",\n            \"country\": \"TW\",\n            \"city\": \"New Taipei City\",\n            \"lifeStage\": \"Employee\"\n        },\n        \"source\": \"accupass\",\n        \"tags\": [\n            {\n                \"_id\": \"5ef401c25c2220dc39a74b1e\",\n                \"type\": 2,\n                \"value\": \"ACCUPASS\"\n            },\n            {\n                \"_id\": \"5ef401c25c222022bca74b1f\",\n                \"type\": 1,\n                \"value\": \"it\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220235fa74b20\",\n                \"type\": 3,\n                \"value\": \"創辦人\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220a3c6a74b21\",\n                \"type\": 4,\n                \"value\": \"台灣科技大學\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220e074a74b22\",\n                \"type\": 5,\n                \"value\": \"資訊管理系\"\n            },\n            {\n                \"_id\": \"5ef401c25c22202e7ca74b23\",\n                \"type\": 900,\n                \"value\": \"2003120858285881378290\"\n            },\n            {\n                \"_id\": \"5ef401c25c22206c9ea74b24\",\n                \"type\": 901,\n                \"value\": \"142140361893004\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220da4ca74b25\",\n                \"type\": 900,\n                \"value\": \"1910140614509631244180\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220403da74b26\",\n                \"type\": 801,\n                \"value\": null\n            },\n            {\n                \"_id\": \"5ef401c25c22205ba4a74b27\",\n                \"type\": 802,\n                \"value\": null\n            },\n            {\n                \"_id\": \"5ef401c25c2220e34ca74b28\",\n                \"type\": 803,\n                \"value\": \"3\"\n            }\n        ],\n        \"updatedAt\": \"2020-06-25T01:45:38.122Z\",\n        \"createdAt\": \"2020-07-08T00:48:32.942Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/routers/user.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/user/",
+    "title": "註冊User",
+    "name": "Reg_User",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "firstname",
+            "description": "<p>Optional Firstname of the User.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lastname",
+            "description": "<p>Mandatory Lastname.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "country",
+            "defaultValue": "DE",
+            "description": "<p>Mandatory with default value &quot;DE&quot;.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "age",
+            "defaultValue": "18",
+            "description": "<p>Optional Age with default 18.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "address",
+            "description": "<p>Optional nested address object.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address[street]",
+            "description": "<p>Optional street and number.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address[zip]",
+            "description": "<p>Optional zip code.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address[city]",
+            "description": "<p>Optional city.</p>"
+          }
+        ],
+        "Login": [
+          {
+            "group": "Login",
+            "type": "String",
+            "optional": false,
+            "field": "pass",
+            "description": "<p>Only logged in users can post this. In generated documentation a separate &quot;Login&quot; Block will be generated.</p>"
+          }
+        ],
+        "UserInfo": [
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "level",
+            "description": "<p>User指標等級</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Number",
+            "optional": false,
+            "field": "level.Score",
+            "description": "<p>總分</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Attractiveness",
+            "description": "<p>吸引力</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Activeness",
+            "description": "<p>活躍度</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "level.Pickiness",
+            "description": "<p>挑剔度</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "profile",
+            "description": "<p>個人檔案</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.photoUrl",
+            "description": "<p>大頭貼</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.email",
+            "description": "<p>Email</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.nickname",
+            "description": "<p>暱稱</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "profile.birthday",
+            "description": "<p>生日</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Object",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>個人標籤</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "tags.type",
+            "description": "<p>標籤類別</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "String",
+            "optional": false,
+            "field": "tags.value",
+            "description": "<p>標籤名稱</p>"
+          },
+          {
+            "group": "UserInfo",
+            "type": "Int",
+            "optional": false,
+            "field": "todayMappingCount",
+            "description": "<p>今天已有多少配對</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "UserInfo-Example:",
+          "content": "{\n        \"level\": {\n            \"Score\": 102,\n            \"Attractiveness\": 70,\n            \"Activeness\": 90,\n            \"Pickiness\": 30\n        },\n        \"todayMappingCount\": 0,\n        \"_id\": \"johnsie\",\n        \"profile\": {\n            \"photoUrl\": \"https://static.accupass.com/userupload/2006240432301254123693.jpg\", //照片\n            \"email\": \"johnsie@accuvally.com\",\n            \"name\": \"謝耀輝\",\n            \"nickname\": \"John Sie\",\n            \"gender\": \"1\",\n            \"phoneCountryCode\": \"886\",\n            \"phone\": \"910944755\",\n            \"relationshipStatus\": \"0\",\n            \"birthday\": \"1981/10/15\",\n            \"country\": \"TW\",\n            \"city\": \"New Taipei City\",\n            \"lifeStage\": \"Employee\"\n        },\n        \"source\": \"accupass\",\n        \"tags\": [\n            {\n                \"_id\": \"5ef401c25c2220dc39a74b1e\",\n                \"type\": 2,\n                \"value\": \"ACCUPASS\"\n            },\n            {\n                \"_id\": \"5ef401c25c222022bca74b1f\",\n                \"type\": 1,\n                \"value\": \"it\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220235fa74b20\",\n                \"type\": 3,\n                \"value\": \"創辦人\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220a3c6a74b21\",\n                \"type\": 4,\n                \"value\": \"台灣科技大學\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220e074a74b22\",\n                \"type\": 5,\n                \"value\": \"資訊管理系\"\n            },\n            {\n                \"_id\": \"5ef401c25c22202e7ca74b23\",\n                \"type\": 900,\n                \"value\": \"2003120858285881378290\"\n            },\n            {\n                \"_id\": \"5ef401c25c22206c9ea74b24\",\n                \"type\": 901,\n                \"value\": \"142140361893004\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220da4ca74b25\",\n                \"type\": 900,\n                \"value\": \"1910140614509631244180\"\n            },\n            {\n                \"_id\": \"5ef401c25c2220403da74b26\",\n                \"type\": 801,\n                \"value\": null\n            },\n            {\n                \"_id\": \"5ef401c25c22205ba4a74b27\",\n                \"type\": 802,\n                \"value\": null\n            },\n            {\n                \"_id\": \"5ef401c25c2220e34ca74b28\",\n                \"type\": 803,\n                \"value\": \"3\"\n            }\n        ],\n        \"updatedAt\": \"2020-06-25T01:45:38.122Z\",\n        \"createdAt\": \"2020-07-08T00:48:32.942Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/routers/user.js",
+    "groupTitle": "User"
+  }
+] });
